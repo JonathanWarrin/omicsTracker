@@ -9,7 +9,7 @@ options(sqldf.driver = "SQLite")
 
 #download data from confluence------------
 confluence_get_download<- function(link) {
-  read.csv(text=content(httr::GET(paste('https://cnfl.extge.co.uk/download/attachments/135701046',link,sep=''),authenticate('jwarrin', '9Jcgbfw2&')),'text'))
+  read.csv(text=content(httr::GET(paste('https://cnfl.extge.co.uk/download/attachments/135701046',link,sep=''),authenticate('jwarrin', '----------')),'text'))
 }
 
 confluence_get_page<- function(link) {
