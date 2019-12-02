@@ -6,30 +6,12 @@ if(length(new.packages)) install.packages(new.packages)
 lapply(list.of.packages, require, character.only = TRUE)
 options(sqldf.driver = "SQLite")
 
-username = ''
-password = ''
-
 setwd('~')
 setwd('..')
 setwd(paste(getwd(),'/Genomics England Ltd/GE-Samples Team - Team Folder/Omics Tracker files',sep=''))
 
 temp = list.files(pattern="*.csv")
 for (i in 1:length(temp)) assign(substr(temp[i],1,nchar(temp[i])-4), read.csv(temp[i]))
-
-# #download data from confluence------------
-# confluence_get_download<- function(link) {
-#   read.csv(text=content(httr::GET(paste('https://cnfl.extge.co.uk/download/attachments/135701046',link,sep=''),authenticate(username, password)),'text'))
-# }
-# 
-# confluence_get_page<- function(link) {
-#   content(httr::GET(paste('https://cnfl.extge.co.uk/rest/api/content/',link,sep=''),authenticate(username, password)))
-# }
-# 
-# a<-confluence_get_page('135701046/child/attachment')
-# 
-# for(x in 1:length(a$results)){
-#   assign(substr(a$results[[x]]$title,1,nchar(a$results[[x]]$title)-4), confluence_get_download(a$results[[x]]$`_links`$download))
-# }
 
 count_aliquots<-sqldf("select pid,omics_in_labkey.'Sample.Type', count(pid) as aliquots from omics_in_labkey group by pid,omics_in_labkey.'Sample.Type'")
 
